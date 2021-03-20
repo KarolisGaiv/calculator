@@ -35,8 +35,7 @@ calcBtn.addEventListener("click", () => {
 // ----------  Functions -----------
 
 function add(a, b) {
-  result = a + b;
-  return result;
+  return a + b;
 }
 
 function substract(a, b) {
@@ -73,7 +72,9 @@ function operate(operator, num1, num2) {
       showInput(result);
       break;
     default:
-      console.log("Don't give up!");
+      result = "Err"
+      showInput(result)
+      console.log("Error");
   }
 }
 
