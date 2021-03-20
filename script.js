@@ -7,6 +7,7 @@ let savedOperator;
 // ----- Selectors--------
 const numbers = document.querySelectorAll(".number");
 const calcDisplay = document.querySelector(".calculator-field");
+const operatorBtns = document.querySelectorAll(".operator");
 const addBtn = document.querySelector("#add");
 const calcBtn = document.querySelector("#calculate");
 
@@ -18,10 +19,12 @@ numbers.forEach((number) => {
   });
 });
 
-addBtn.addEventListener("click", (e) => {
-  firstValue = input;
-  saveOperator(e.target.id);
-  resetInput();
+operatorBtns.forEach((operator) => {
+  operator.addEventListener("click", (e) => {
+    firstValue = input;
+    saveOperator(e.target.id);
+    resetInput();
+  });
 });
 
 calcBtn.addEventListener("click", () => {
@@ -52,10 +55,25 @@ function divide(a, b) {
 function operate(operator, num1, num2) {
   const a = parseInt(num1);
   const b = parseInt(num2);
-  if (operator === "add") {
-    console.log(add(a, b));
-  } else {
-    console.log("don't give up!!!");
+  switch (operator) {
+    case "add":
+      result = add(a, b);
+      showInput(result);
+      break;
+    case "substract":
+      result = substract(a, b);
+      showInput(result);
+      break;
+    case "multiply":
+      result = multiply(a, b);
+      showInput(result);
+      break;
+    case "divide":
+      result = divide(a, b);
+      showInput(result);
+      break;
+    default:
+      console.log("Don't give up!");
   }
 }
 
