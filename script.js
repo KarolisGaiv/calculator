@@ -17,6 +17,9 @@ const clearBtn = document.querySelector("#clear");
 
 numbers.forEach((number) => {
   number.addEventListener("click", () => {
+    if(result !== "" && savedOperator === undefined) {
+      clearData();
+    }
     setInput(number.innerHTML);
     calcDisplay.classList.add("populated");
     showInput(input);
@@ -29,6 +32,7 @@ operatorBtns.forEach((operator) => {
       return;
     }
     if (firstValue !== "" && savedOperator !== "") {
+      console.log("Tikrinimas pavyko");
       operate(savedOperator, firstValue, input);
     }
     firstValue = input;
