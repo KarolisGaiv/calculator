@@ -10,6 +10,7 @@ const calcDisplay = document.querySelector(".calculator-field");
 const operatorBtns = document.querySelectorAll(".operator");
 const addBtn = document.querySelector("#add");
 const calcBtn = document.querySelector("#calculate");
+const clearBtn = document.querySelector("#clear");
 
 // ------ Event listeners --------
 numbers.forEach((number) => {
@@ -31,6 +32,8 @@ calcBtn.addEventListener("click", () => {
   const secondValue = input;
   operate(savedOperator, firstValue, secondValue);
 });
+
+clearBtn.addEventListener("click", clear);
 
 // ----------  Functions -----------
 
@@ -72,8 +75,8 @@ function operate(operator, num1, num2) {
       showInput(result);
       break;
     default:
-      result = "Err"
-      showInput(result)
+      result = "Err";
+      showInput(result);
       console.log("Error");
   }
 }
@@ -94,4 +97,10 @@ function showInput(value) {
 
 function saveOperator(action) {
   savedOperator = action;
+}
+
+function clear() {
+  resetInput();
+  firstValue = "";
+  savedOperator = "";
 }
