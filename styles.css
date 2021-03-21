@@ -15,6 +15,7 @@ body {
 }
 
 .calculator-field {
+  color: darkgrey;
   font-size: 26px;
   text-align: center;
   background-color: #f1faeb;
@@ -74,4 +75,8 @@ button:hover {
 #clear:hover {
   background-color: #e77782;
   box-shadow: 0 4px #cc515c;
+}
+
+.populated {
+  color: black;
 }

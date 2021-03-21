@@ -16,6 +16,7 @@ const clearBtn = document.querySelector("#clear");
 numbers.forEach((number) => {
   number.addEventListener("click", () => {
     setInput(number.innerHTML);
+    calcDisplay.classList.add("populated");
     showInput(input);
   });
 });
@@ -25,6 +26,7 @@ operatorBtns.forEach((operator) => {
     firstValue = input;
     saveOperator(e.target.id);
     resetInput();
+    calcDisplay.classList.remove("populated");
   });
 });
 
@@ -53,7 +55,6 @@ function divide(a, b) {
   return a / b;
 }
 
-// = mygtuko funkcija
 function operate(operator, num1, num2) {
   const a = parseInt(num1);
   const b = parseInt(num2);
@@ -75,9 +76,8 @@ function operate(operator, num1, num2) {
       showInput(result);
       break;
     default:
-      result = "Err";
+      result = "Err, please refresh calculator";
       showInput(result);
-      console.log("Error");
   }
 }
 
