@@ -3,13 +3,11 @@ let input = "";
 let result;
 let firstValue;
 let savedOperator;
-let previousValue;
 
 // ----- Selectors--------
 const numbers = document.querySelectorAll(".number");
 const calcDisplay = document.querySelector(".calculator-field");
 const operatorBtns = document.querySelectorAll(".operator");
-const addBtn = document.querySelector("#add");
 const calcBtn = document.querySelector("#calculate");
 const clearBtn = document.querySelector("#clear");
 
@@ -17,7 +15,7 @@ const clearBtn = document.querySelector("#clear");
 
 numbers.forEach((number) => {
   number.addEventListener("click", () => {
-    if(result !== "" && savedOperator === undefined) {
+    if (result !== "" && savedOperator === undefined) {
       clearData();
     }
     setInput(number.innerHTML);
@@ -32,7 +30,6 @@ operatorBtns.forEach((operator) => {
       return;
     }
     if (firstValue !== "" && savedOperator !== "") {
-      console.log("Tikrinimas pavyko");
       operate(savedOperator, firstValue, input);
     }
     firstValue = input;
@@ -85,9 +82,7 @@ function operate(operator, num1, num2) {
       result = add(a, b);
       showInput(result);
       input = result;
-      console.log(`input: ${input}`);
       savedOperator = undefined;
-      console.log(`savedOpetaror: ${savedOperator}, result is ${result}`);
       break;
     case "substract":
       result = substract(a, b);
@@ -119,10 +114,10 @@ function setInput(button) {
 
 function resetInput() {
   input = "";
-  showInput(0);
+  showInput(result);
 }
 
-function showInput(value) {
+function showInput(value = 0 || firstValue) {
   calcDisplay.innerHTML = value;
 }
 
