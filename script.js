@@ -28,6 +28,9 @@ operatorBtns.forEach((operator) => {
     if (input === "") {
       return;
     }
+    if (firstValue !== "" && savedOperator !== "") {
+      operate(savedOperator, firstValue, input);
+    }
     firstValue = input;
     saveOperator(e.target.id);
     resetInput();
@@ -37,6 +40,10 @@ operatorBtns.forEach((operator) => {
 
 calcBtn.addEventListener("click", () => {
   const secondValue = input;
+  if (result !== "" && savedOperator !== "") {
+    showInput(result);
+    calcDisplay.classList.add("populated");
+  }
   if (secondValue === "") {
     return;
   }
