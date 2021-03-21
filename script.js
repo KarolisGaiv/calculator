@@ -3,6 +3,7 @@ let input = "";
 let result;
 let firstValue;
 let savedOperator;
+let previousValue;
 
 // ----- Selectors--------
 const numbers = document.querySelectorAll(".number");
@@ -13,6 +14,7 @@ const calcBtn = document.querySelector("#calculate");
 const clearBtn = document.querySelector("#clear");
 
 // ------ Event listeners --------
+
 numbers.forEach((number) => {
   number.addEventListener("click", () => {
     setInput(number.innerHTML);
@@ -23,6 +25,9 @@ numbers.forEach((number) => {
 
 operatorBtns.forEach((operator) => {
   operator.addEventListener("click", (e) => {
+    if (input === "") {
+      return;
+    }
     firstValue = input;
     saveOperator(e.target.id);
     resetInput();
@@ -32,10 +37,13 @@ operatorBtns.forEach((operator) => {
 
 calcBtn.addEventListener("click", () => {
   const secondValue = input;
+  if (secondValue === "") {
+    return;
+  }
   operate(savedOperator, firstValue, secondValue);
 });
 
-clearBtn.addEventListener("click", clear);
+clearBtn.addEventListener("click", clearData);
 
 // ----------  Functions -----------
 
@@ -52,6 +60,9 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
+  if (b === 0) {
+    return "Undefined";
+  }
   return a / b;
 }
 
@@ -62,22 +73,31 @@ function operate(operator, num1, num2) {
     case "add":
       result = add(a, b);
       showInput(result);
+      input = result;
+      console.log(`input: ${input}`);
+      savedOperator = undefined;
+      console.log(`savedOpetaror: ${savedOperator}, result is ${result}`);
       break;
     case "substract":
       result = substract(a, b);
       showInput(result);
+      input = result;
+      savedOperator = undefined;
       break;
     case "multiply":
       result = multiply(a, b);
       showInput(result);
+      input = result;
+      savedOperator = undefined;
       break;
     case "divide":
       result = divide(a, b);
       showInput(result);
+      input = result;
+      savedOperator = undefined;
       break;
     default:
-      result = "Err, please refresh calculator";
-      showInput(result);
+      return;
   }
 }
 
@@ -99,8 +119,9 @@ function saveOperator(action) {
   savedOperator = action;
 }
 
-function clear() {
+function clearData() {
   resetInput();
   firstValue = "";
   savedOperator = "";
+  result = undefined;
 }
