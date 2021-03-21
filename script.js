@@ -85,7 +85,7 @@ function setInput(button) {
 
 function resetInput() {
   input = "";
-  showInput(input);
+  showInput(0);
 }
 
 function showInput(value) {
